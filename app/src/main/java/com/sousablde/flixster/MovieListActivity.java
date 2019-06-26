@@ -9,6 +9,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -31,6 +33,12 @@ public class MovieListActivity extends AppCompatActivity {
     //instance fields
     AsyncHttpClient client;
 
+    //track the image values of the posters for loading the images in the right ratio
+    String imageBaseUrl;
+
+    //poster size to actually fetch the images
+    String posterSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,9 @@ public class MovieListActivity extends AppCompatActivity {
 
         //initialize client on onCreate
         client = new AsyncHttpClient();
+
+        //get the configuration on app creation
+        getConfiguration();
     }
 
     //get the configuration from the api
@@ -53,12 +64,24 @@ public class MovieListActivity extends AppCompatActivity {
         client.get(url, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
+
+                try {
+                    //getting the values out of the json
+                    imageBaseUrl = response.getString("secure_base_url");
+                    //get the poster size
+                    JSONArray posterSizeOptions = response.getJSONArray("poster_sizes");
+                    //use the option at index 3 or w342 as a fallback
+                    posterSize = posterSizeOptions.optString(3, "w342");
+
+                } catch (JSONException e) {
+                    logError("Failed while parsing the configuration", e, true);
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                logError("Failed getting configuration", throwable, true);
+                logError("Failed getting configuration", throwable, true
+                );
             }
         });
     }

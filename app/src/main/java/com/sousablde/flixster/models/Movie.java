@@ -17,6 +17,10 @@ public class Movie {
     //adding the fields for the backdrop
     public String backdropPath;
 
+    // no-arg, empty constructor required for Parceler
+    public Movie() {
+    }
+
     //initiate from JSON
     public Movie(JSONObject object) throws JSONException {
 

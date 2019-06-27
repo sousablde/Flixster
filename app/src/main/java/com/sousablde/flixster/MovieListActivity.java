@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.sousablde.flixster.models.Config;
 import com.sousablde.flixster.models.Movie;
 
 import org.json.JSONArray;
@@ -36,11 +37,6 @@ public class MovieListActivity extends AppCompatActivity {
     //instance fields
     AsyncHttpClient client;
 
-    //track the image values of the posters for loading the images in the right ratio
-    String imageBaseUrl;
-
-    //poster size to actually fetch the images
-    String posterSize;
 
     //track parsed movies that come back/currently playing
     ArrayList<Movie> movies;
@@ -49,6 +45,8 @@ public class MovieListActivity extends AppCompatActivity {
     RecyclerView rvMovies;
     //the adapter wired to the recycler view
     MovieAdapter adapter;
+    //image config
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,20 +130,11 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    //adding correction to parse the images object before poster and logos
-                    JSONObject images = response.getJSONObject("images");
+                    config = new Config(response);
+                    Log.i(TAG, String.format("Loaded configuration with imageBasedURL %s and posterSize %s", config.getImageBaseUrl(), config.getPosterSize()));
 
-                    //getting the values out of the json
-                    imageBaseUrl = images.getString("secure_base_url");
-
-                    //get the poster size
-                    JSONArray posterSizeOptions = response.getJSONArray("poster_sizes");
-
-                    //use the option at index 3 or w342 as a fallback
-                    posterSize = posterSizeOptions.optString(3, "w342");
-
-                    Log.i(TAG, String.format("Loaded configuration with imageBasedURL %s and posterSize %s", imageBaseUrl, posterSize));
-
+                    //pass config to adapter
+                    adapter.setConfig(config);
                     //get the now playing movie list
                     getNowPLaying();
 

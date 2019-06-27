@@ -12,22 +12,14 @@ public class Movie {
     private String posterPath;//not the full url
 
     //initiate from JSON
-    public Movie(JSONObject object) {
-        try {
-            title = object.getString("title");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            overview = object.getString("overview");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            posterPath = object.getString("poster_path");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public Movie(JSONObject object) throws JSONException {
+
+        title = object.getString("title");
+
+        overview = object.getString("overview");
+
+        posterPath = object.getString("poster_path");
+
     }
 
     public String getTitle() {

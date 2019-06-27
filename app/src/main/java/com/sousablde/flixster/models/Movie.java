@@ -17,6 +17,9 @@ public class Movie {
     //adding the fields for the backdrop
     public String backdropPath;
 
+    //adding a new field to track the vote_avergae value returned from the API
+    Double voteAverage;
+
     // no-arg, empty constructor required for Parceler
     public Movie() {
     }
@@ -31,6 +34,8 @@ public class Movie {
         posterPath = object.getString("poster_path");
 
         backdropPath = object.getString("backdrop_path");
+
+        voteAverage = object.getDouble("vote_average");
 
     }
 
@@ -48,5 +53,9 @@ public class Movie {
 
     public String getBackdropPath() {
         return backdropPath;
+    }
+
+    public Double getVoteAverage() {
+        return voteAverage;
     }
 }

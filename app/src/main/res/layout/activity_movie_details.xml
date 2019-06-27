@@ -16,6 +16,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/tv_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#090808"
         app:layout_constraintBottom_toTopOf="@+id/rbVoteAverage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

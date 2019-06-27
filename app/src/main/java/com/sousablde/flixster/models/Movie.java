@@ -17,7 +17,9 @@ public class Movie {
     //adding the fields for the backdrop
     public String backdropPath;
 
-    //adding a new field to track the vote_avergae value returned from the API
+    //declare an Integer id field and parse its value from the JSONObject passed to the constructor using the key: id
+    public int id;
+    //adding a new field to track the vote_average value returned from the API
     Double voteAverage;
 
     // no-arg, empty constructor required for Parceler
@@ -36,6 +38,8 @@ public class Movie {
         backdropPath = object.getString("backdrop_path");
 
         voteAverage = object.getDouble("vote_average");
+
+        id = object.getInt("id");
 
     }
 
@@ -57,5 +61,9 @@ public class Movie {
 
     public Double getVoteAverage() {
         return voteAverage;
+    }
+
+    public int getId() {
+        return id;
     }
 }

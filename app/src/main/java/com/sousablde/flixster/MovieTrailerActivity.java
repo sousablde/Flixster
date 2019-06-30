@@ -10,13 +10,27 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class MovieTrailerActivity extends YouTubeBaseActivity {
 
+    //starting with constants that we will have to use repeatedly
+    //base URL for the API
+
+    //parameter name for the API key
+    public final static String API_KEY_PARAM = "youtube_api_key";
+
+    //tag for logging from this activity
+
+    public final static String TAG = "MovieTrailerActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_trailer);
 
+        // extract parameter from Intent inside MovieTrailerActivity
+        // pass key as a video id
+
+
         // temporary test video id -- TODO replace with movie trailer video id
-        final String videoId = "tKodtNFpzBA";
+        final String videoId = getIntent().getStringExtra("key");
 
         // resolve the player view from the layout
         YouTubePlayerView playerView = findViewById(R.id.player);

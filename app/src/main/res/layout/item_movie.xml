@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/ivPosterIMage"
+        android:id="@+id/ivPosterImage"
         android:layout_width="90dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/ivPosterIMage"
+        app:layout_constraintStart_toEndOf="@+id/ivPosterImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -44,11 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/moview_overview_and_synopsis"
+        android:text="@string/movie_overview_and_synopsis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="4"
-        app:layout_constraintStart_toEndOf="@+id/ivPosterIMage"
+        app:layout_constraintStart_toEndOf="@+id/ivPosterImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 </android.support.constraint.ConstraintLayout>
